@@ -1,5 +1,6 @@
 <?php
     session_start(); 
+
     class LocalHostController
     {
         public static function home()
@@ -28,6 +29,7 @@
                 $username = $_POST['username'] ?? '';
                 $password = $_POST['password'] ?? '';
 
+                
                 if ($username === 'admin' && $password === 'password')
                 {
                     $_SESSION['authenticated'] = true;
@@ -63,12 +65,13 @@
         }
     }
 
-    class LocalHostMiddleware
+    class Middleware
     {
-        public static function auth($redirectPath = 'router-native/login')
+        public static function auth($redirectPath)
         {
             if (!isset($_SESSION['authenticated']))
             {
+                
                 header("Location: /$redirectPath");
                 exit();
             }
@@ -81,40 +84,70 @@
         'localhost' => [
             [
                 'path' => 'router-native',
-                'controller' => 'LocalHostController::home',
+                'controller' => 
+                    [
+                        'class' => 'LocalHostController',
+                        'method' => 'home',
+                    ],
             ],
             [
                 'path' => 'router-native/index',
-                'controller' => 'LocalHostController::home',
+                'controller' => 
+                    [
+                        'class' => 'LocalHostController',
+                        'method' => 'home',
+                    ],
             ],
             [
                 'path' => 'router-native/index.php',
-                'controller' => 'RedirectController::goto',
-                'params' => ['router-native'],
+                'controller' => 
+                    [
+                        'class' => 'RedirectController',
+                        'method' => 'goto',
+                        'params' => ['router-native'],
+                    ],
             ],
             [
                 'path' => 'router-native/greeting',
-                'controller' => 'LocalHostController::greeting',
-                'middleware' => 'LocalHostMiddleware::auth',
-            ],
-            [
-                'path' => 'router-native/greeting2',
-                'controller' => 'LocalHostController::greeting',
+                'controller' => 
+                    [
+                        'class' => 'LocalHostController',
+                        'method' => 'greeting',
+                    ],
+                'middleware' => 
+                    [
+                        'class' => 'Middleware',
+                        'method' => 'auth',
+                        'params' => ['router-native/login'],
+                    ],
             ],
             [
                 'path' => 'router-native/login',
-                'controller' => 'LocalHostController::login',
+                'controller' => 
+                    [
+                        'class' => 'LocalHostController',
+                        'method' => 'login',
+                    ],
             ],
             [
                 'path' => 'router-native/logout',
-                'controller' => 'LocalHostController::logout',
+                'controller' => 
+                    [
+                        'class' => 'LocalHostController',
+                        'method' => 'logout',
+                    ],
             ],
             [
                 'path' => '**',
-                'controller' => 'LocalHostController::pageNotFound',
+                'controller' => 
+                    [
+                        'class' => 'LocalHostController',
+                        'method' => 'pageNotFound',
+                    ],
             ],
         ],
     ];
+
 
     $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     $path = trim($requestUri, '/');
@@ -137,34 +170,33 @@
             {
                 $routeFound = true;
 
-                if (isset($route['middleware']) && $route['middleware'] !== null)
+                if (isset($route['middleware']))
                 {
-                    if(isset($route['redirect']) && $route['redirect'] !== null)
-                    {
-                        call_user_func($route['middleware'], $route['redirect']);
-                    }
-                    else
-                    {
-                        call_user_func($route['middleware']);
-                    }
+                    $middleware = $route['middleware'];
+                    call_user_func([$middleware['class'], $middleware['method']], $middleware['params'][0] ?? null);
                 }
 
-                if (isset($route['params']) && count($route['params']) > 0)
+                $controller = $route['controller'];
+                if (isset($controller['params']))
                 {
-                    echo call_user_func($route['controller'], ...$route['params']);
+                    echo call_user_func([$controller['class'], $controller['method']], ...($controller['params'] ?? []));
                 }
                 else
                 {
-                    echo call_user_func($route['controller']);
+                    echo call_user_func([$controller['class'], $controller['method']]);
                 }
-                break;
+                break; 
             }
         }
 
-        if(!$routeFound)
+        if (!$routeFound)
         {
-            echo call_user_func($domainErrorPage['controller']);
+            $controller = $domainErrorPage['controller'];
+            echo call_user_func([$controller['class'], $controller['method']]);
         }
     }
-
+    else
+    {
+        echo "404 - Domain not recognized";
+    }
 ?>

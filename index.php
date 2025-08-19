@@ -1,5 +1,5 @@
 <?php
-    session_start(); 
+    session_start();
 
     class LocalHostController
     {
@@ -29,7 +29,6 @@
                 $username = $_POST['username'] ?? '';
                 $password = $_POST['password'] ?? '';
 
-                
                 if ($username === 'admin' && $password === 'password')
                 {
                     $_SESSION['authenticated'] = true;
@@ -71,7 +70,6 @@
         {
             if (!isset($_SESSION['authenticated']))
             {
-                
                 header("Location: /$redirectPath");
                 exit();
             }
@@ -86,24 +84,21 @@
                 'path' => 'router-native',
                 'controller' => 
                     [
-                        'class' => 'LocalHostController',
-                        'method' => 'home',
+                        'pointer' => 'LocalHostController::home',
                     ],
             ],
             [
                 'path' => 'router-native/index',
                 'controller' => 
                     [
-                        'class' => 'LocalHostController',
-                        'method' => 'home',
+                        'pointer' => 'LocalHostController::home',
                     ],
             ],
             [
                 'path' => 'router-native/index.php',
                 'controller' => 
                     [
-                        'class' => 'RedirectController',
-                        'method' => 'goto',
+                        'pointer' => 'RedirectController::goto',
                         'params' => ['router-native'],
                     ],
             ],
@@ -111,13 +106,11 @@
                 'path' => 'router-native/greeting',
                 'controller' => 
                     [
-                        'class' => 'LocalHostController',
-                        'method' => 'greeting',
+                        'pointer' => 'LocalHostController::greeting',
                     ],
                 'middleware' => 
                     [
-                        'class' => 'Middleware',
-                        'method' => 'auth',
+                        'pointer' => 'Middleware::auth',
                         'params' => ['router-native/login'],
                     ],
             ],
@@ -125,24 +118,21 @@
                 'path' => 'router-native/login',
                 'controller' => 
                     [
-                        'class' => 'LocalHostController',
-                        'method' => 'login',
+                        'pointer' => 'LocalHostController::login',
                     ],
             ],
             [
                 'path' => 'router-native/logout',
                 'controller' => 
                     [
-                        'class' => 'LocalHostController',
-                        'method' => 'logout',
+                        'pointer' => 'LocalHostController::logout',
                     ],
             ],
             [
                 'path' => '**',
                 'controller' => 
                     [
-                        'class' => 'LocalHostController',
-                        'method' => 'pageNotFound',
+                        'pointer' => 'LocalHostController::pageNotFound',
                     ],
             ],
         ],
@@ -155,11 +145,11 @@
     if (isset($routes[$host]))
     {
         $domainRoutes = array_slice($routes[$host], 0, -1, true);
-        echo "<pre>";
+        echo "<pre style='overflow:auto;height:200px;'>";
         var_dump($domainRoutes);
-        echo "<hr>";
         var_dump($path);
         echo "</pre>";
+        echo "<hr>";
 
         $domainErrorPage = end($routes[$host]);
         $routeFound = false;
@@ -173,17 +163,17 @@
                 if (isset($route['middleware']))
                 {
                     $middleware = $route['middleware'];
-                    call_user_func([$middleware['class'], $middleware['method']], $middleware['params'][0] ?? null);
+                    call_user_func($middleware['pointer'], $middleware['params'][0] ?? null);
                 }
 
                 $controller = $route['controller'];
                 if (isset($controller['params']))
                 {
-                    echo call_user_func([$controller['class'], $controller['method']], ...($controller['params'] ?? []));
+                    echo call_user_func($controller['pointer'], ...($controller['params'] ?? []));
                 }
                 else
                 {
-                    echo call_user_func([$controller['class'], $controller['method']]);
+                    echo call_user_func($controller['pointer']);
                 }
                 break; 
             }
@@ -192,7 +182,7 @@
         if (!$routeFound)
         {
             $controller = $domainErrorPage['controller'];
-            echo call_user_func([$controller['class'], $controller['method']]);
+            echo call_user_func($controller['pointer']);
         }
     }
     else

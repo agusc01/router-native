@@ -63,7 +63,7 @@
         }
     }
 
-    class Middleware
+    class LocalHostMiddleware
     {
         public static function auth($redirectPath = 'router-native/login')
         {
@@ -74,52 +74,44 @@
             }
         }
     }
-    
+
     $host = $_SERVER['HTTP_HOST'];
 
     $routes = [
         'localhost' => [
             [
                 'path' => 'router-native',
-                'controller' => 'LocalHostController',
-                'method' => 'home',
+                'controller' => 'LocalHostController::home',
             ],
             [
                 'path' => 'router-native/index',
-                'controller' => 'LocalHostController',
-                'method' => 'home',
+                'controller' => 'LocalHostController::home',
             ],
             [
                 'path' => 'router-native/index.php',
-                'controller' => 'RedirectController',
-                'method' => 'goto',
+                'controller' => 'RedirectController::goto',
                 'params' => ['router-native'],
             ],
             [
                 'path' => 'router-native/greeting',
-                'controller' => 'LocalHostController',
-                'method' => 'greeting',
-                'middleware' => 'Middleware::auth',
+                'controller' => 'LocalHostController::greeting',
+                'middleware' => 'LocalHostMiddleware::auth',
             ],
             [
                 'path' => 'router-native/greeting2',
-                'controller' => 'LocalHostController',
-                'method' => 'greeting',
+                'controller' => 'LocalHostController::greeting',
             ],
             [
                 'path' => 'router-native/login',
-                'controller' => 'LocalHostController',
-                'method' => 'login',
+                'controller' => 'LocalHostController::login',
             ],
             [
                 'path' => 'router-native/logout',
-                'controller' => 'LocalHostController',
-                'method' => 'logout',
+                'controller' => 'LocalHostController::logout',
             ],
             [
                 'path' => '**',
-                'controller' => 'LocalHostController',
-                'method' => 'pageNotFound',
+                'controller' => 'LocalHostController::pageNotFound',
             ],
         ],
     ];
@@ -159,11 +151,11 @@
 
                 if (isset($route['params']) && count($route['params']) > 0)
                 {
-                    echo call_user_func([$route['controller'], $route['method']], ...$route['params']);
+                    echo call_user_func($route['controller'], ...$route['params']);
                 }
                 else
                 {
-                    echo call_user_func([$route['controller'], $route['method']]);
+                    echo call_user_func($route['controller']);
                 }
                 break;
             }
@@ -171,7 +163,7 @@
 
         if(!$routeFound)
         {
-            echo call_user_func([$domainErrorPage['controller'], $domainErrorPage['method']]);
+            echo call_user_func($domainErrorPage['controller']);
         }
     }
 

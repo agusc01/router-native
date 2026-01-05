@@ -1,5 +1,13 @@
 RewriteEngine On
-RewriteBase /router-native/
+
+# ErrorDocument 404 /404
+# ErrorDocument 403 /404
+
+# files
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
+
+# directories
+# RewriteCond %{REQUEST_FILENAME} !-d
+
+# redirect
 RewriteRule ^(.*)$ index.php [QSA,L]

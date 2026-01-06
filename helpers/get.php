@@ -1,6 +1,6 @@
 <?php
-    require_once 'http.php';
-    require_once 'messages-get.php';
+    require_once 'helpers/http.php';
+    require_once 'helpers/messages-get.php';
 
     class GET
     {

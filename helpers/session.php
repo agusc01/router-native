@@ -1,6 +1,6 @@
 <?php
-    require_once 'http.php';
-    require_once 'messages-session.php';
+    require_once 'helpers/http.php';
+    require_once 'helpers/messages-session.php';
 
     class SESSION
     {

@@ -12,7 +12,7 @@
     }
     else
     {
-        define('MAIN_FOLDER_APP', 'routes');
+        define('MAIN_FOLDER_APP', 'router-native');
         error_reporting(E_ALL);
         ini_set('display_errors', 1);
     }

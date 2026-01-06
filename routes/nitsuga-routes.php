@@ -37,6 +37,12 @@
                 ],
             ],
             [
+                'path' => 'colour',
+                'router' => [
+                    'pointer' => 'NitsugaRouter::colour',
+                ],
+            ],
+            [
                 'path' => 'grettings',
                 'router' => [
                     'pointer' => 'NitsugaRouter::grettings',

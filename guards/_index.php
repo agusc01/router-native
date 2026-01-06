@@ -1,8 +1,4 @@
 <?php
-    // require_once 'controllers/nitsuga-controller.php';
-?>
-
-<?php
     $filesToRequireOnce = glob(__DIR__ . '/*.php');
 
     foreach ($filesToRequireOnce as $fileToRequireOnce)

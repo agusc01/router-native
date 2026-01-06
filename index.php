@@ -1,21 +1,10 @@
 <?php
 
     session_start();
-    require_once 'controllers/_index.php';
-    require_once 'routers/_index.php';
-
-    if($_SERVER['HTTP_HOST'] != 'localhost')
-    {
-        define('MAIN_FOLDER_APP', '');
-        error_reporting(E_ALL);
-        ini_set('display_errors', 1);
-    }
-    else
-    {
-        define('MAIN_FOLDER_APP', 'router-native');
-        error_reporting(E_ALL);
-        ini_set('display_errors', 1);
-    }
+    require_once 'router/_index.php';
+    require_once 'guards/_index.php';
+    require_once 'routes/_index.php';
+    require_once 'config/_index.php';
 
     $host = str_replace('www.', '', $_SERVER['HTTP_HOST']);
 
@@ -46,26 +35,34 @@
 
         foreach ($domainRoutes as $route)
         {
-            $path = MAIN_FOLDER_APP . ($route['path'] === '' ? '' : '/') . $route['path'];
+            $path = MAIN_FOLDER . ($route['path'] === '' ? '' : '/') . $route['path'];
 
             if ($path === $currentPath)
             {
                 $routeFound = true;
 
-                if (isset($route['middleware']))
+                if (isset($route['guard']))
                 {
-                    $middleware = $route['middleware'];
-                    call_user_func($middleware['pointer'], $middleware['params'][0] ?? null);
+                    $guard = $route['guard'];
+
+                    if (isset($guard['params']))
+                    {
+                        call_user_func($guard['pointer'], ...($guard['params'] ?? []));
+                    }
+                    else
+                    {
+                        echo call_user_func($guard['pointer']);
+                    }
                 }
 
-                $controller = $route['controller'];
-                if (isset($controller['params']))
+                $router = $route['router'];
+                if (isset($router['params']))
                 {
-                    echo call_user_func($controller['pointer'], ...($controller['params'] ?? []));
+                    echo call_user_func($router['pointer'], ...($router['params'] ?? []));
                 }
                 else
                 {
-                    echo call_user_func($controller['pointer']);
+                    echo call_user_func($router['pointer']);
                 }
                 break;
             }
@@ -73,8 +70,8 @@
 
         if (!$routeFound)
         {
-            $controller = $domainErrorPage['controller'];
-            echo call_user_func($controller['pointer']);
+            $router = $domainErrorPage['router'];
+            echo call_user_func($router['pointer']);
         }
     }
     else

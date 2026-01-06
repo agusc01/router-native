@@ -1,8 +1,8 @@
 <?php
 
-    class NitsugaController
+    class QuimeraRouter
     {
-        private static $prefix = 'pages/nitsuga';
+        private static $prefix = 'pages/quimera';
 
         public static function includeFile($fileName)
         {

@@ -1,8 +1,8 @@
 <?php
 
-    class QuimeraController
+    class NitsugaRouter
     {
-        private static $prefix = 'pages/quimera';
+        private static $prefix = 'pages/nitsuga';
 
         public static function includeFile($fileName)
         {
@@ -23,6 +23,16 @@
             self::includeFile('404.php');
         }
 
+        public static function contact()
+        {
+            self::includeFile('contact.php');
+        }
+        
+        public static function grettings()
+        {
+            self::includeFile('grettings.php');
+        }
+        
         public static function pageUnderMaintenance()
         {
             self::includeFile('page-under-maintenance.php');

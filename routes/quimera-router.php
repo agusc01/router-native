@@ -8,31 +8,31 @@
         [
             [
                 'path' => '',
-                'controller' => [
-                    'pointer' => 'QuimeraController::home',
+                'router' => [
+                    'pointer' => 'QuimeraRouter::home',
                 ],
             ],
             [
                 'path' => 'index',
-                'controller' => [
+                'router' => [
                     'pointer' => 'QuimeraController::home',
                 ],
             ],
             [
                 'path' => 'home',
-                'controller' => [
+                'router' => [
                     'pointer' => 'QuimeraController::home',
                 ],
             ],
             [
                 'path' => 'cupoftea',
-                'controller' => [
+                'router' => [
                     'pointer' => 'QuimeraController::pageUnderMaintenance',
                 ],
             ],
             [
                 'path' => '**',
-                'controller' => [
+                'router' => [
                     'pointer' => 'QuimeraController::pageNotFound',
                 ],
             ],

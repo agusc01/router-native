@@ -1,9 +1,7 @@
 <?php
-    abstract class HTTP
+    trait HTTP
     {
-        protected static $data;
-
-        private static function requestMethod()
+        private static function _requestHttp()
         {
             switch (get_called_class()) 
             {
@@ -24,33 +22,33 @@
 
         public static function positiveParameter($name, $default = -1)
         {
-            return isset(self::requestMethod()[$name]) && (int)self::requestMethod()[$name] > -1 
-                ? (int)self::requestMethod()[$name] 
+            return isset(self::_requestHttp()[$name]) && (int)self::_requestHttp()[$name] > -1 
+                ? (int)self::_requestHttp()[$name] 
                 : $default;
         }
 
         public static function floatPositiveParameter($name, $default = -1)
         {
-            return isset(self::requestMethod()[$name]) && (float)self::requestMethod()[$name] > -1 
-                ? (float)self::requestMethod()[$name] 
+            return isset(self::_requestHttp()[$name]) && (float)self::_requestHttp()[$name] > -1 
+                ? (float)self::_requestHttp()[$name] 
                 : $default;
         }
 
         public static function stringParameter($name, $default = '')
         {
-            return isset(self::requestMethod()[$name]) ? self::requestMethod()[$name] : $default;
+            return isset(self::_requestHttp()[$name]) ? self::_requestHttp()[$name] : $default;
         }
 
         public static function arrayParameter($name, $default = [])
         {
-            return isset(self::requestMethod()[$name]) && is_array(self::requestMethod()[$name]) 
-                ? self::requestMethod()[$name] 
+            return isset(self::_requestHttp()[$name]) && is_array(self::_requestHttp()[$name]) 
+                ? self::_requestHttp()[$name] 
                 : $default;
         }
 
         public static function hiddenParameter($name)
         {
-            return isset(self::requestMethod()[$name]);
+            return isset(self::_requestHttp()[$name]);
         }
 
     }

@@ -2,7 +2,7 @@
 
     class QuimeraRouter
     {
-        private static $prefix = 'pages/quimera';
+        private static $prefix = 'pages/quimera/views';
 
         public static function includeFile($fileName)
         {

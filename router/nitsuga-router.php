@@ -2,7 +2,7 @@
 
     class NitsugaRouter
     {
-        private static $prefix = 'pages/nitsuga';
+        private static $prefix = 'pages/nitsuga/views';
 
         public static function includeFile($fileName)
         {
@@ -26,6 +26,11 @@
         public static function contact()
         {
             self::includeFile('contact.php');
+        }
+
+        public static function colour()
+        {
+            self::includeFile('colour.php');
         }
         
         public static function grettings()

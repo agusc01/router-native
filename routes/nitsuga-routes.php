@@ -53,6 +53,12 @@
                 ],
             ],
             [
+                'path' => 'captcha',
+                'router' => [
+                    'pointer' => 'NitsugaRouter::captcha',
+                ],
+            ],
+            [
                 'path' => '**',
                 'router' => [
                     'pointer' => 'NitsugaRouter::pageNotFound',

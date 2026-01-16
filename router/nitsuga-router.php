@@ -37,6 +37,11 @@
         {
             self::includeFile('grettings.php');
         }
+
+        public static function captcha()
+        {
+            self::includeFile('captcha.php');
+        }
         
         public static function pageUnderMaintenance()
         {

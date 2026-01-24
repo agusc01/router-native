@@ -6,7 +6,7 @@
 </head>
 <body>
 <?php
-    require_once 'controllers/email-controller.php';
+    require_once 'helpers/email.php';
     require_once 'controllers/website-controller.php';
 
     echo "Email. Nitsuga<hr>";
@@ -17,7 +17,7 @@
     echo "</pre>";
     
     // $sendTo = "your_email@mail.com";
-    // $response = EmailController::send($sendTo, 'Hola', 'Testing') ? '' : 'NO';
+    // $response = Email::send($sendTo, 'Body things', 'My custom header') ? '' : 'NO';
     // echo "The email was $response send";
 
 ?>

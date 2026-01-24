@@ -4,7 +4,7 @@
     require_once 'database/database-adapter.php';
     require_once 'controllers/website-controller.php';
     
-    class EmailController
+    class Email
     {
         private static function sendCustom($recipientEmail, $bodyContent, $header)
         {

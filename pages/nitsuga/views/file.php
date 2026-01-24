@@ -11,17 +11,21 @@
     include_once 'pages/nitsuga/views/components/navbar.php';
     if(POST::isPost())
     {
-        // README: --------------- IMAGEN -------------------
-        [$isSaved, $pathImage, $imageName] = FileController::saveImage('inputImage', 'assets/uploads/');
-        if($isSaved)
+        // README: --------------- IMAGES -------------------
+        [$isSaved, $uploadedFiles] = FileController::saveAllImages('inputImages', 'assets/uploads/');
+
+        if ($isSaved) 
         {
-            echo "path $pathImage<hr>";
-            $file = new File([
-                'nameFile' => $imageName,
-                'urlFile' => $pathImage
-            ]);
-            FileController::createOne($file);
-        }      
+            foreach ($uploadedFiles as [$pathImage, $imageName]) 
+            {
+                echo "path: $pathImage<hr>";
+                $file = new File([
+                    'nameFile' => $imageName,
+                    'urlFile' => $pathImage
+                ]);
+                FileController::createOne($file);
+            }
+        }
 
         // README: --------------- PDF -------------------
         [$isSaved, $pathPDF, $PDFName] = FileController::savePDF('inputPDF', 'assets/uploads/');
@@ -42,8 +46,8 @@
 ?>
 <form action="" method="POST" enctype="multipart/form-data">
     <label>
-        Imagen
-        <input type="file" name="inputImage" id="inputImage" accept="<?= '.' . implode(', .', ALLOWED_IMAGE_EXTENSIONS); ?>">
+        Image
+        <input type="file" name="inputImages[]" id="inputImages[]" multiple accept="<?= '.' . implode(', .', ALLOWED_IMAGE_EXTENSIONS); ?>">
     </label>
     <label>
         PDF

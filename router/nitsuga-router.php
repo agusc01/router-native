@@ -67,6 +67,11 @@
         {
             self::includeFile('forms.php');
         }
+
+        public static function title()
+        {
+            self::includeFile('title.php');
+        }
     }
 
 ?>

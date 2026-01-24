@@ -72,6 +72,13 @@
                 'title' => 'Validations',
             ],
             [
+                'path' => 'title',
+                'router' => [
+                    'pointer' => 'NitsugaRouter::title',
+                ],
+                'title' => 'Title from routes',
+            ],
+            [
                 'path' => 'protected',
                 'router' => [
                     'pointer' => 'NitsugaRouter::protected',

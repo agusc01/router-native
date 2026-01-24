@@ -1,3 +1,7 @@
+<?php include_once 'pages/nitsuga/views/components/head.php'; ?>
+<!-- More links or scripts -->
+</head>
+<body>
 <?php
     require_once 'helpers/url.php';
 
@@ -7,3 +11,5 @@
     // URL::redirectTo('cupoftea');
     URL::redirectToScript('cupoftea');
 ?>
+</body>
+</html>

@@ -47,10 +47,12 @@
 
                     if (isset($guard['params']))
                     {
+                        require_once 'includes/title.php';
                         call_user_func($guard['pointer'], ...($guard['params'] ?? []));
                     }
                     else
                     {
+                        require_once 'includes/title.php';
                         echo call_user_func($guard['pointer']);
                     }
                 }
@@ -58,12 +60,15 @@
                 $router = $route['router'];
                 if (isset($router['params']))
                 {
+                    require_once 'includes/title.php';
                     echo call_user_func($router['pointer'], ...($router['params'] ?? []));
                 }
                 else
                 {
+                    require_once 'includes/title.php';
                     echo call_user_func($router['pointer']);
                 }
+                                            
                 break;
             }
         }
@@ -71,6 +76,8 @@
         if (!$routeFound)
         {
             $router = $domainErrorPage['router'];
+
+            require_once 'includes/title.php';
             echo call_user_func($router['pointer']);
         }
     }

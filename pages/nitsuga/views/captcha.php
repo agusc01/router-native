@@ -1,5 +1,8 @@
+<?php include_once 'pages/nitsuga/views/components/head.php'; ?>
+<!-- More links or scripts -->
+</head>
+<body>
 <?php
-
     require_once 'controllers/captcha-controller.php';
 
     [$url, $numbers] = CaptchaController::create();
@@ -10,5 +13,6 @@
     echo "<h1>$numbers</h1>";
 
     $captcha = CaptchaController::save($url, $numbers, true);
-
 ?>
+</body>
+</html>

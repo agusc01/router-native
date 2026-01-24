@@ -41,6 +41,7 @@
         define('SEND_EMAIL', 0); //=false
     }
     
+    define('DEFAULT_TITLE_MSG', 'Welcome !');
     define('CAPTCHA_URL_INPUT', 'assets/captcha/');
     define('CAPTCHA_URL_OUTPUT', 'assets/captcha/randoms/');
     define('SHOW_ERRORS_MESSAGE', '<br><h1 style="color:red;text-align:center">An error occurred. Please send an email to administration explaining what happened so they can fix it. Thank you.</h1>');

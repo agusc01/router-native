@@ -1,10 +1,12 @@
+<?php include_once 'pages/nitsuga/views/components/head.php'; ?>
+<!-- More links or scripts -->
+</head>
+<body>
 <?php
-
     require_once 'helpers/post.php';
-
+    
     echo "Forms. Nitsuga<hr>";
     include_once 'pages/nitsuga/views/components/navbar.php';
-
 
     $validations = [
         'nameColour' => [ 'validator' => 'Validator::stringCustomLength' ,  'minLength' => 5,  'maxLength' => 20,   'name' => 'name of colour' ],
@@ -24,8 +26,6 @@
     var_dump($inputs);
     echo "</pre>";
 ?>
-
-
 <form action="" method="POST">
     <input type="text" name="nameColour" id="nameColour" value="" placeholder="nameColour">
     <input type="text" name="aliasColour" id="aliasColour" value="" placeholder="alias">
@@ -37,3 +37,5 @@
     <input type="number" name="sizeColour" id="sizeColour" value="" placeholder="sizeColour">
     <button>sent</button>
 </form>
+</body>
+</html>

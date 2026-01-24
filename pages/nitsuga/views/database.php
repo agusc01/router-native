@@ -1,3 +1,7 @@
+<?php include_once 'pages/nitsuga/views/components/head.php'; ?>
+<!-- More links or scripts -->
+</head>
+<body>
 <?php
 
     include_once 'pages/nitsuga/models/colour-model.php';
@@ -25,3 +29,5 @@
     // var_dump($colours_after);
     echo "</pre>";
 ?>
+</body>
+</html>

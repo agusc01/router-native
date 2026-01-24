@@ -1,5 +1,8 @@
 <?php
 
+    require_once 'controllers/base-controller.php';
+    require_once 'database/database-adapter.php';
+
     class QueryController
     {
         public static function basic($query, $one = false)
@@ -50,7 +53,7 @@
             catch (PDOException $e) { DatabaseAdapter::showErrors($e); }
         }
 
-        public static function mostrar($query, $parameters = [], $one = false, $die = true)
+        public static function show($query, $parameters = [], $one = false, $die = true)
         {
             $queryWithValues = $query;
             if (is_array($parameters) || is_object($parameters))

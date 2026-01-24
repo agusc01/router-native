@@ -4,9 +4,6 @@
     
     class CaptchaController extends BaseController
 	{
-		public static $model = 'Captcha';
-		public static $table = 'captchas';
-
         // CREATE TABLE captchas (
         //     -- idCaptcha INT AUTO_INCREMENT PRIMARY KEY,
         //     valueCaptcha VARCHAR(10) NOT NULL,
@@ -14,6 +11,9 @@
         //     createdAtCaptcha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         // );
 
+		public static $model = 'Captcha';
+		public static $table = 'captchas';
+        
         public static function getOneByValueAndUrlCaptcha($parameters)
         {
             $query = "SELECT * from captchas AS ca

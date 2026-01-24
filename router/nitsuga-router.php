@@ -52,6 +52,11 @@
         {
             self::includeFile('index.php');
         }
+
+        public static function email()
+        {
+            self::includeFile('email.php');
+        }
     }
 
 ?>

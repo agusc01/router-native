@@ -59,6 +59,12 @@
                 ],
             ],
             [
+                'path' => 'email',
+                'router' => [
+                    'pointer' => 'NitsugaRouter::email',
+                ],
+            ],
+            [
                 'path' => '**',
                 'router' => [
                     'pointer' => 'NitsugaRouter::pageNotFound',

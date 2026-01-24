@@ -1,5 +1,5 @@
 <?php
 
-    echo "Page Not Found. Nitsuga";
+    echo "Page Not Found. Nitsuga,";
 
 ?>

@@ -14,6 +14,11 @@
         define('DB_USER', 'c2751438_ddbb0');
         define('DB_PASS', 'kazeKUte67');
     
+        define('DEFAULT_MINUTES_TO_DELETE_CAPTCHAS', 10);
+        
+        define('SHOW_ERRORS_BASIC', 0); //= false;
+        define('SHOW_ERRORS_COMPLETE', 0); //= false;
+        define('SEND_EMAIL', 1); //=true
     }
     else
     {
@@ -29,15 +34,15 @@
         define('DB_USER', 'root');
         define('DB_PASS', '');
 
-        
+        define('DEFAULT_MINUTES_TO_DELETE_CAPTCHAS', 2);
+
+        define('SHOW_ERRORS_BASIC', 1); //= true;
+        define('SHOW_ERRORS_COMPLETE', 1); //= true;
+        define('SEND_EMAIL', 0); //=false
     }
     
     define('CAPTCHA_URL_INPUT', 'assets/captcha/');
     define('CAPTCHA_URL_OUTPUT', 'assets/captcha/randoms/');
-    CONST DEFAULT_MINUTES_TO_DELETE_CAPTCHAS = 10;
-    
-    const SHOW_ERRORS_BASIC = true;
-    const SHOW_ERRORS_COMPLETE = false;
     define('SHOW_ERRORS_MESSAGE', '<br><h1 style="color:red;text-align:center">An error occurred. Please send an email to administration explaining what happened so they can fix it. Thank you.</h1>');
 
 ?>

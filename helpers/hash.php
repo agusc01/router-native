@@ -1,7 +1,7 @@
 <?php
-    class HashController
+    class Hash
     {
-        public static function createOne($value = 'duck', $secret = 'duck')
+        public static function new($value = 'duck', $secret = 'duck')
         {
             $uniqueValue = $value . '|' . $secret . '|' . time();
             $hash = hash('sha256', $uniqueValue);

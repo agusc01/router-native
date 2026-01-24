@@ -77,6 +77,11 @@
         {
             self::includeFile('file.php');
         }
+
+        public static function databaseExcel()
+        {
+            self::includeFile('database-excel.php');
+        }
     }
 
 ?>

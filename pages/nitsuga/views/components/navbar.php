@@ -3,7 +3,7 @@
     <li><a href="/<?= MAIN_FOLDER ?>/home">Home</a></li>
     <li>Generate <a href="/<?= MAIN_FOLDER ?>/captcha">captcha</a></li>
     <li>Send <a href="/<?= MAIN_FOLDER ?>/email">email</a></li>
-    <li>Use <a href="/<?= MAIN_FOLDER ?>/database">database</a></li>
+    <li>Use <a href="/<?= MAIN_FOLDER ?>/database">database</a>. Note: if you want to download in excel <a href="/<?= MAIN_FOLDER ?>/database-excel" target="_blank" >click here</a></li>
     <li>Handle <a href="/<?= MAIN_FOLDER ?>/grettings?name=John Doe">GET</a>. Note: See the params</li>
     <li>Have fun with <a href="/<?= MAIN_FOLDER ?>/forms">forms</a></li>
     <li>Routes with title <a href="/<?= MAIN_FOLDER ?>/title">see</a> [Dynamics]</li>

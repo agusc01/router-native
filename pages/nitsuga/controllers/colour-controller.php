@@ -1,6 +1,7 @@
 <?php
 
     require_once 'controllers/base-controller.php';
+    require_once 'pages/nitsuga/models/colour-model.php';
 
     class ColourController extends BaseController
 	{

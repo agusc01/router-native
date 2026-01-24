@@ -79,6 +79,13 @@
                 'title' => 'Title from routes',
             ],
             [
+                'path' => 'file',
+                'router' => [
+                    'pointer' => 'NitsugaRouter::file',
+                ],
+                'title' => 'File things',
+            ],            
+            [
                 'path' => 'protected',
                 'router' => [
                     'pointer' => 'NitsugaRouter::protected',

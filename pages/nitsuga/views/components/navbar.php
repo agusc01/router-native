@@ -10,6 +10,7 @@
     <li>Look <a href="/<?= MAIN_FOLDER ?>/contact">redirection</a>. Note: It can do it wiht PHP and JS</li>
     <?php $url404 = "strange_url-".uniqid();?>
     <li><a href="/<?= MAIN_FOLDER ?>/<?= $url404;?>">Page not found</a>. Note: Watch the url [<?= $url404;?>]</li>
-    <li><a href="/<?= MAIN_FOLDER ?>/protected">Private without access</a>. or <a href="/<?= MAIN_FOLDER ?>/protected?pass=go">Private with access</a></li>
+    <li>Guards ! <a href="/<?= MAIN_FOLDER ?>/protected">Private without access</a>. or <a href="/<?= MAIN_FOLDER ?>/protected?pass=go">Private with access</a></li>
+    <li>Save a <a href="/<?= MAIN_FOLDER ?>/file">file</a></li>
 </ul>
 <hr>

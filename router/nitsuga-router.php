@@ -72,6 +72,11 @@
         {
             self::includeFile('title.php');
         }
+
+        public static function file()
+        {
+            self::includeFile('file.php');
+        }
     }
 
 ?>

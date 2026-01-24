@@ -41,6 +41,11 @@
         define('SEND_EMAIL', 0); //=false
     }
     
+    // const ALLOWED_IMAGE_EXTENSIONS = ['jpg', 'jpeg', 'png', 'gif'];
+    const ALLOWED_IMAGE_EXTENSIONS = ['jpg', 'jpeg', 'png'];
+    const ALLOWED_PDF_EXTENSIONS = ['pdf'];
+    const ALLOWED_WORD_EXTENSIONS = ['doc', 'docx'];
+    const ALLOWED_EXCEL_EXTENSIONS = ['xls', 'xlsx'];
     define('DEFAULT_TITLE_MSG', 'Welcome !');
     define('CAPTCHA_URL_INPUT', 'assets/captcha/');
     define('CAPTCHA_URL_OUTPUT', 'assets/captcha/randoms/');

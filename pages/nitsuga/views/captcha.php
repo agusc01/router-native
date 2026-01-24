@@ -1,11 +1,11 @@
 <?php
 
     require_once 'controllers/captcha-controller.php';
-    require_once 'models/captcha-model.php';
-    require_once 'config/_index.php';
 
     [$url, $numbers] = CaptchaController::create();
 
+    echo "Captcha. Nitsuga <hr>";
+    include_once 'pages/nitsuga/views/components/navbar.php';
     echo "<img src='$url' />";
     echo "<h1>$numbers</h1>";
 

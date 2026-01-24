@@ -16,9 +16,9 @@
 
         public static function validation($validations)
         {
+            $newEntity = [];
             if(self::isPOST())
             {
-                $newEntity = [];
                 foreach ($validations as $field => $options) 
                 {
                     $value = $_POST[$field] ?? null;
@@ -43,11 +43,11 @@
                         {
                             $params[] = $options['maxLength'];
                         }
-                        elseif (isset($options['minLength)']) && ($options['validator'] == 'Validator::stringMinLength' ))
+                        elseif (isset($options['minLength']) && ($options['validator'] == 'Validator::stringMinLength' ))
                         {
                             $params[] = $options['minLength'];
                         }
-                        elseif (isset($options['minLength']) && $options['maxLength'] && $options['validator'] == 'Validator::stringCustomLength')
+                        elseif (isset($options['minLength']) && isset($options['maxLength']) && $options['validator'] == 'Validator::stringCustomLength')
                         {
                             $params[] = $options['minLength'];
                             $params[] = $options['maxLength'];
@@ -97,6 +97,8 @@
                     }
                 }
             }
+
+            return $newEntity;
         }
 
     }

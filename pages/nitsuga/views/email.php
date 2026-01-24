@@ -2,9 +2,12 @@
     require_once 'controllers/email-controller.php';
     require_once 'controllers/website-controller.php';
 
-    echo "Email. Nitsuga<br>";
+    echo "Email. Nitsuga<hr>";
+    include_once 'pages/nitsuga/views/components/navbar.php';
 
+    echo "<pre>";
     var_dump(WebsiteController::current());
+    echo "</pre>";
     
     // $sendTo = "your_email@mail.com";
     // $response = EmailController::send($sendTo, 'Hola', 'Testing') ? '' : 'NO';

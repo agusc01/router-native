@@ -4,6 +4,7 @@
     include_once 'pages/nitsuga/controllers/colour-controller.php';
 
     echo "Database. Nitsuga <hr>";
+    include_once 'pages/nitsuga/views/components/navbar.php';
 
     // $colour = new Colour(['nameColor' => 'new color', 'hexaColor' => '012345']);
     // ColourController::createOne($colour);

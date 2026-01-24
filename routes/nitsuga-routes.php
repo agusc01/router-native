@@ -60,6 +60,12 @@
                 ],
             ],
             [
+                'path' => 'forms',
+                'router' => [
+                    'pointer' => 'NitsugaRouter::forms',
+                ],
+            ],
+            [
                 'path' => '**',
                 'router' => [
                     'pointer' => 'NitsugaRouter::pageNotFound',

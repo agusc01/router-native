@@ -1,11 +1,9 @@
 <?php
+    require_once 'helpers/url.php';
 
-    require_once 'controllers/_index.php';
-    require_once 'models/_index.php';
+    echo "Contact. Nitsuga<hr>";
+    include_once 'pages/nitsuga/views/components/navbar.php';
 
-    echo "Contact. Nitsuga";
-
-    // require_once 'helpers/url.php';
-    // URL::redirectTo('home');
-    // URL::redirectToScript('home');
+    // URL::redirectTo('cupoftea');
+    URL::redirectToScript('cupoftea');
 ?>

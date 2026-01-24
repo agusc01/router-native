@@ -42,10 +42,6 @@
                 'router' => [
                     'pointer' => 'NitsugaRouter::grettings',
                 ],
-                'guard' => [
-                    'pointer' => 'NitsugaGuard::isAdmin',
-                    'params' => ['cupoftea']
-                ],
             ],
             [
                 'path' => 'captcha',
@@ -63,6 +59,23 @@
                 'path' => 'forms',
                 'router' => [
                     'pointer' => 'NitsugaRouter::forms',
+                ],
+            ],
+            [
+                'path' => 'protected',
+                'router' => [
+                    'pointer' => 'NitsugaRouter::protected',
+                ],
+                'guard' => [
+                    'pointer' => 'NitsugaGuard::isAdmin',
+                    'params' => ['404']
+                    // 'params' => ['cupoftea']
+                ],
+            ],
+            [
+                'path' => '404',
+                'router' => [
+                    'pointer' => 'NitsugaRouter::pageNotFound',
                 ],
             ],
             [

@@ -58,6 +58,11 @@
             self::includeFile('email.php');
         }
 
+        public static function protected()
+        {
+            self::includeFile('protected.php');
+        }
+
         public static function forms()
         {
             self::includeFile('forms.php');

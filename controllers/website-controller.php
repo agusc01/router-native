@@ -14,7 +14,7 @@
         //   `urlFaviconWebsite` varchar(100) NOT NULL,
         //   `tokenMailWebsite` varchar(40) NOT NULL,
         //   `mailFromTokenWebsite` varchar(100) NOT NULL
-        // ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+        // );
 
 		public static $model = 'Website';
 		public static $table = 'websites';

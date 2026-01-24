@@ -37,9 +37,9 @@
                 ],
             ],
             [
-                'path' => 'colour',
+                'path' => 'database',
                 'router' => [
-                    'pointer' => 'NitsugaRouter::colour',
+                    'pointer' => 'NitsugaRouter::database',
                 ],
             ],
             [

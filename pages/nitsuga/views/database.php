@@ -1,11 +1,9 @@
 <?php
 
-    require_once 'controllers/_index.php';
-    require_once 'models/_index.php';
-    include_once 'pages/nitsuga/models/_index.php';
-    include_once 'pages/nitsuga/controllers/_index.php';
+    include_once 'pages/nitsuga/models/colour-model.php';
+    include_once 'pages/nitsuga/controllers/colour-controller.php';
 
-    echo "Colours. Nitsuga <hr>";
+    echo "Database. Nitsuga <hr>";
 
     // $colour = new Colour(['nameColor' => 'new color', 'hexaColor' => '012345']);
     // ColourController::createOne($colour);

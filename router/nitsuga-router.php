@@ -28,9 +28,9 @@
             self::includeFile('contact.php');
         }
 
-        public static function colour()
+        public static function database()
         {
-            self::includeFile('colour.php');
+            self::includeFile('database.php');
         }
         
         public static function grettings()

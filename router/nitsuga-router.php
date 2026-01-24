@@ -82,6 +82,11 @@
         {
             self::includeFile('database-excel.php');
         }
+
+        public static function databasePDF()
+        {
+            self::includeFile('database-pdf.php');
+        }
     }
 
 ?>

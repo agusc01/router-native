@@ -91,7 +91,14 @@
                     'pointer' => 'NitsugaRouter::databaseExcel',
                 ],
                 'title' => "Download Colour's Database",
-            ],         
+            ],
+            [
+                'path' => 'database-pdf',
+                'router' => [
+                    'pointer' => 'NitsugaRouter::databasePDF',
+                ],
+                'title' => "Download Colour's Database",
+            ],               
             [
                 'path' => 'protected',
                 'router' => [

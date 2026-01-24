@@ -1,9 +1,4 @@
 <?php
-    if(!isset($routes))
-    {
-        $routes = [];
-    }
-
     $routes['localhost'] = 
         [
             [

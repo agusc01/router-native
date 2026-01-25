@@ -1,7 +1,6 @@
 <?php include_once 'config/_index.php'; ?>
 <?php include_once 'helpers/post.php'; ?>
 <?php include_once 'controllers/file-controller.php'; ?>
-<?php include_once 'models/file-model.php'; ?>
 <?php include_once 'pages/nitsuga/views/components/head.php'; ?>
 <!-- More links or scripts -->
 </head>
@@ -46,7 +45,7 @@
 ?>
 <form action="" method="POST" enctype="multipart/form-data">
     <label>
-        Image
+        Images
         <input type="file" name="inputImages[]" id="inputImages[]" multiple accept="<?= '.' . implode(', .', ALLOWED_IMAGE_EXTENSIONS); ?>">
     </label>
     <label>

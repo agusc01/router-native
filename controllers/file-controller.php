@@ -3,6 +3,7 @@
     require_once 'helpers/post.php';
     require_once 'controllers/base-controller.php';
     require_once 'controllers/query-controller.php';
+    require_once 'models/file-model.php';
     
     class FileController extends BaseController
 	{

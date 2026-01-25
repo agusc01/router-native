@@ -1,6 +1,9 @@
 <?php
 
-    session_start();
+    if (session_status() === PHP_SESSION_NONE)
+    {
+        session_start();
+    }
     require_once 'router/_index.php';
     require_once 'guards/_index.php';
     require_once 'routes/_index.php';

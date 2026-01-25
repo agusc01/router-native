@@ -10,25 +10,25 @@
             [
                 'path' => 'index',
                 'router' => [
-                    'pointer' => 'QuimeraController::home',
+                    'pointer' => 'QuimeraRouter::home',
                 ],
             ],
             [
                 'path' => 'home',
                 'router' => [
-                    'pointer' => 'QuimeraController::home',
+                    'pointer' => 'QuimeraRouter::home',
                 ],
             ],
             [
                 'path' => 'cupoftea',
                 'router' => [
-                    'pointer' => 'QuimeraController::pageUnderMaintenance',
+                    'pointer' => 'QuimeraRouter::pageUnderMaintenance',
                 ],
             ],
             [
                 'path' => '**',
                 'router' => [
-                    'pointer' => 'QuimeraController::pageNotFound',
+                    'pointer' => 'QuimeraRouter::pageNotFound',
                 ],
             ],
         ];

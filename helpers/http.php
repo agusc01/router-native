@@ -12,12 +12,20 @@
                     return $_POST;
                     break;
                 case 'SESSION':
-                    session_start();
+                    if (session_status() === PHP_SESSION_NONE)
+                    {
+                        session_start();
+                    }
                     return $_SESSION;
                     break;
                 default:
                     throw new InvalidArgumentException('Unimplemented class');
             }
+        }
+
+        public static function isset($name)
+        {
+            return isset(self::_requestHttp()[$name]);
         }
 
         public static function positiveParameter($name, $default = -1)

@@ -1,6 +1,6 @@
 <?php
     
-    require_once 'database/_index.php';
+    require_once 'database/database-adapter.php';
     require_once 'config/_index.php';
 
     class BaseController
@@ -8,7 +8,12 @@
         public static $table;
         public static $model;
 
-        public static function createOne($object)
+        public static function date()
+        {
+            return date('Y-m-d H:i:s');
+        }
+
+        public static function createOne($object, $show = false)
         {
             try
             {
@@ -29,7 +34,7 @@
 
                 foreach ($filtered_values as $attribute => $type)
                 {
-                    $valor = $object->$attribute ?? '';
+                    $value = $object->$attribute ?? '';
                     $param = PDO::PARAM_STR;
                     if(
                         $type == 'int'
@@ -40,10 +45,24 @@
                         || str_starts_with($attribute, 'quantity')
                     )
                     {
-                        $valor = $object->$attribute ?? 0;
+                        $value = $object->$attribute ?? 0;
                         $param = PDO::PARAM_INT;
                     }
-                    $queryPDO->bindValue(':' . $attribute, $valor , $param);
+                    $queryPDO->bindValue(':' . $attribute, $value , $param);
+                    if($show)
+                    {
+                        echo "<pre>";
+                        var_dump([$attribute, $value]);
+                        echo "</pre>";
+                    }
+                }
+
+                if($show)
+                {
+                    echo "<pre>";
+                    echo "<hr>";
+                    var_dump($query);
+                    echo "</pre>";
                 }
 
                 $retornoPDO = $queryPDO->execute();
@@ -53,7 +72,7 @@
             catch (PDOException $e) { DatabaseAdapter::showErrors($e); }
         }
 
-        public static function getAll($where = '', $orden = '')
+        public static function getAll($where = '', $orden = '', $show = false)
         {
             try
             {
@@ -66,13 +85,25 @@
 
                 $query = 'SELECT * FROM ' . static::$table . ' ' . $where . ' ' . $orden . ';';
                 $queryPDO = $accessObject->prepare($query);
+
+                if($show)
+                {
+                    echo "<pre>";
+                    var_dump($where);
+                    echo "<hr>";
+                    var_dump($orden);
+                    echo "<hr>";
+                    var_dump($query);
+                    echo "</pre>";
+                }
+
                 $queryPDO->execute();
                 return $queryPDO->fetchAll(PDO::FETCH_OBJ);
             }
             catch (PDOException $e) { DatabaseAdapter::showErrors($e); }
         }
 
-        public static function getOneById($id)
+        public static function getOneById($id, $show = false)
         {
             try
             {
@@ -83,14 +114,24 @@
                 $query = 'SELECT * FROM ' . static::$table . " WHERE $primaryKey = :$primaryKey";
                 $queryPDO = $accessObject->prepare($query);
                 $queryPDO->bindValue(":$primaryKey", $id, PDO::PARAM_INT);
-                $queryPDO->execute();
 
+                if($show)
+                {
+                    echo "<pre>";
+                    var_dump($id);
+                    echo "<hr>";
+                    var_dump($query);
+                    echo "</pre>";
+                }
+
+                $queryPDO->execute();
+                
                 return $queryPDO->fetch(PDO::FETCH_OBJ);
             }
             catch (PDOException $e) { DatabaseAdapter::showErrors($e); }
         }
 
-        public static function updateOne($object)
+        public static function updateOne($object, $show = false)
         {
             try
             {
@@ -120,7 +161,7 @@
 
                 foreach ($attributes as $attribute => $type)
                 {
-                    $valor = $object->$attribute ?? '';
+                    $value = $object->$attribute ?? '';
                     $param = PDO::PARAM_STR;
                     if(
                         $type == 'int'
@@ -131,10 +172,24 @@
                         || str_starts_with($attribute, 'quantity')
                     )
                     {
-                        $valor = $object->$attribute ?? 0;
+                        $value = $object->$attribute ?? 0;
                         $param = PDO::PARAM_INT;
                     }
-                    $queryPDO->bindValue(':' . $attribute, $valor , $param);
+                    if($show)
+                    {
+                        echo "<pre>";
+                        var_dump([$attribute, $value]);
+                        echo "</pre>";
+                    }
+                    $queryPDO->bindValue(':' . $attribute, $value , $param);
+                }
+
+                if($show)
+                {
+                    echo "<pre>";
+                    echo "<hr>";
+                    var_dump($query);
+                    echo "</pre>";
                 }
 
                 return $queryPDO->execute();
@@ -142,7 +197,7 @@
             catch (PDOException $e) { DatabaseAdapter::showErrors($e); }
         }
 
-        public static function deleteOneById($id)
+        public static function deleteOneById($id, $show = false)
         {
             try
             {
@@ -152,6 +207,15 @@
                 $query = "DELETE FROM " . static::$table . " WHERE id" . static::$model . " = :id;";
                 $queryPDO = $accessObject->prepare($query);
                 $queryPDO->bindValue(":id", $id, PDO::PARAM_INT);
+
+                if($show)
+                {
+                    echo "<pre>";
+                    var_dump($id);
+                    echo "<hr>";
+                    var_dump($query);
+                    echo "</pre>";
+                }
 
                 return $queryPDO->execute();
             }

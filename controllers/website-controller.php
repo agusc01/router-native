@@ -1,6 +1,7 @@
 <?php
     require_once 'controllers/base-controller.php';
     require_once 'controllers/query-controller.php';
+    require_once 'models/website-model.php';
     
     class WebsiteController extends BaseController
 	{

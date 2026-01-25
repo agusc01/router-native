@@ -1,6 +1,8 @@
 <?php
+    require_once 'config/_index.php';
     require_once 'controllers/base-controller.php';
     require_once 'controllers/query-controller.php';
+    require_once 'models/captcha-model.php';
     
     class CaptchaController extends BaseController
 	{
@@ -27,7 +29,7 @@
         //public
         private static function getAllAfterXMinutes($parameters = [':time' => ['value' => DEFAULT_MINUTES_TO_DELETE_CAPTCHAS] ] )
         {
-            $currentDate = date("Y-m-d H:i:s");
+            $currentDate = self::date();
             
             $query = "SELECT * FROM captchas AS ca
                           WHERE createdAtCaptcha < DATE_SUB('$currentDate', INTERVAL :time MINUTE);";
@@ -38,7 +40,7 @@
         //public
         private static function deleteAfterXMinutes($parameters = [':time' => ['value' => DEFAULT_MINUTES_TO_DELETE_CAPTCHAS] ] )
         {
-            $currentDate = date("Y-m-d H:i:s");
+            $currentDate = self::date();
             
             $query = "DELETE FROM captchas
                           WHERE createdAtCaptcha < DATE_SUB('$currentDate', INTERVAL :time MINUTE);";

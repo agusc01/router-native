@@ -15,6 +15,7 @@
         define('DB_PASS', 'kazeKUte67');
     
         define('DEFAULT_MINUTES_TO_DELETE_CAPTCHAS', 10);
+        define('DEFAULT_MINUTES_TO_DELETE_SESSION', 10);
         
         define('SHOW_ERRORS_BASIC', 0); //= false;
         define('SHOW_ERRORS_COMPLETE', 0); //= false;
@@ -35,6 +36,7 @@
         define('DB_PASS', '');
 
         define('DEFAULT_MINUTES_TO_DELETE_CAPTCHAS', 2);
+        define('DEFAULT_MINUTES_TO_DELETE_SESSION', 2);
 
         define('SHOW_ERRORS_BASIC', 1); //= true;
         define('SHOW_ERRORS_COMPLETE', 1); //= true;

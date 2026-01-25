@@ -87,6 +87,16 @@
         {
             self::includeFile('database-pdf.php');
         }
+
+        public static function login()
+        {
+            self::includeFile('login.php');
+        }
+
+        public static function authDashboard()
+        {
+            self::includeFile('auth/dashboard.php');
+        }
     }
 
 ?>

@@ -98,14 +98,33 @@
                     'pointer' => 'NitsugaRouter::databasePDF',
                 ],
                 'title' => "Download Colour's Database",
-            ],               
+            ],    
+            [
+                'path' => 'login',
+                'router' => [
+                    'pointer' => 'NitsugaRouter::login',
+                ],
+                'title' => "Authorized Users Only",
+            ],
+            [
+                'path' => 'auth/dashboard',
+                'router' => [
+                    'pointer' => 'NitsugaRouter::authDashboard',
+                ],
+                'guard' => [
+                    'pointer' => 'NitsugaGuard::isAdmin',
+                    'params' => ['login']
+                    // 'params' => ['cupoftea']
+                ],
+                'title' => "Admins only",
+            ],              
             [
                 'path' => 'protected',
                 'router' => [
                     'pointer' => 'NitsugaRouter::protected',
                 ],
                 'guard' => [
-                    'pointer' => 'NitsugaGuard::isAdmin',
+                    'pointer' => 'NitsugaGuard::isCustomer',
                     'params' => ['404']
                     // 'params' => ['cupoftea']
                 ],

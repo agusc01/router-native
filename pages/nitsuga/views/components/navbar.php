@@ -11,7 +11,10 @@
     <li>Look <a href="/<?= MAIN_FOLDER ?>/contact">redirection</a>. Note: It can do it wiht PHP and JS</li>
     <?php $url404 = "strange_url-".uniqid();?>
     <li><a href="/<?= MAIN_FOLDER ?>/<?= $url404;?>">Page not found</a>. Note: Watch the url [<?= $url404;?>]</li>
-    <?php if(NitsugaGuard::isNotLogged('home',false)):?>
+    <?php if(NitsugaGuard::isLogged('home',false)):?>
+        <li>YOU'RE AUTHORIZED <a href="/<?= MAIN_FOLDER ?>/login">see dashboard (indirect)</a></li>
+        <li>YOU'RE AUTHORIZED <a href="/<?= MAIN_FOLDER ?>/auth/dashboard">see dashboard (direct)</a></li>
+    <?php else:?>
         <li>Login <a href="/<?= MAIN_FOLDER ?>/login">authorized users only</a>. Note: Using Guards with time (SessionController)</li>
     <?php endif;?>
     <li>Guards ! <a href="/<?= MAIN_FOLDER ?>/protected">Private without access</a>. or <a href="/<?= MAIN_FOLDER ?>/protected?pass=go">Private with access</a></li>

@@ -18,8 +18,8 @@
     }
     finally
     {
-        session_destroy(); // $_SESSION('jwt') = ''
         SessionController::deleteOneById($idUser ?? -1);
+        session_destroy(); // $_SESSION('jwt') = ''
         URL::redirectTo('home');
     }
     

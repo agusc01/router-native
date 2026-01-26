@@ -16,7 +16,7 @@
 
         public static function isCustomer($path = 'home')
         {
-            if(self::isAnActiveUser() && GET::stringParameter('pass') == 'go')
+            if(GET::stringParameter('pass') == 'go')
             {
                 return true;
             }

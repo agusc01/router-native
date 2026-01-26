@@ -16,6 +16,7 @@
     
         define('DEFAULT_MINUTES_TO_DELETE_CAPTCHAS', 10);
         define('DEFAULT_MINUTES_TO_DELETE_SESSION', 10);
+        define('DEFAULT_MINUTES_TO_DELETE_JWT', DEFAULT_MINUTES_TO_DELETE_SESSION);
         
         define('SHOW_ERRORS_BASIC', 0); //= false;
         define('SHOW_ERRORS_COMPLETE', 0); //= false;
@@ -37,6 +38,7 @@
 
         define('DEFAULT_MINUTES_TO_DELETE_CAPTCHAS', 2);
         define('DEFAULT_MINUTES_TO_DELETE_SESSION', 2);
+        define('DEFAULT_MINUTES_TO_DELETE_JWT', DEFAULT_MINUTES_TO_DELETE_SESSION);
 
         define('SHOW_ERRORS_BASIC', 1); //= true;
         define('SHOW_ERRORS_COMPLETE', 1); //= true;
@@ -48,6 +50,7 @@
     const ALLOWED_PDF_EXTENSIONS = ['pdf'];
     const ALLOWED_WORD_EXTENSIONS = ['doc', 'docx'];
     const ALLOWED_EXCEL_EXTENSIONS = ['xls', 'xlsx'];
+    define('HASH_JWT', 'HS256');
     define('DEFAULT_TITLE_MSG', 'Welcome !');
     define('CAPTCHA_URL_INPUT', 'assets/captcha/');
     define('CAPTCHA_URL_OUTPUT', 'assets/captcha/randoms/');

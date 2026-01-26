@@ -3,31 +3,15 @@
     require_once 'config/_index.php';
     require_once 'helpers/url.php';
     require_once 'helpers/get.php';
-    require_once 'helpers/session.php';
     require_once 'controllers/user-controller.php';
     require_once 'controllers/session-controller.php';
+    require_once 'controllers/jwt-controller.php';
 
     class NitsugaGuard
     {
-        public static function isAdmin($path = 'home')
+        public static function isAdmin($path = 'home', $cancelCatch = true)
         {
-            if(self::isAnActiveUser() && SESSION::stringParameter('isAdmin'))
-            {
-                $idUser = SESSION::stringParameter('idUser');
-                if(UserController::getOneById($idUser))
-                {
-                    $parametersUser = [':idUser' => ['value' => $idUser]];
-                    SessionController::deleteOneByIdAtAfterXMinutes($parametersUser);
-                    $currentSession = SessionController::getOneByIdUser($parametersUser);
-                    if($currentSession)
-                    {   
-                        $currentSession->lastMoveAtSession = SessionController::date();
-                        SessionController::updateOne($currentSession);
-                        return true;
-                    }
-                }
-            }
-            URL::redirectTo($path);
+            return self::isLoggedAndXTypeUser($path, $cancelCatch, 'admin'); //TODO: typeUser in DB
         }
 
         public static function isCustomer($path = 'home')
@@ -40,21 +24,68 @@
             URL::redirectTo($path);
         }
 
-        public static function isVendor($path = 'home')
+        public static function isLogged($path = 'home', $cancelCatch = true)
         {
-            if(self::isAnActiveUser() /* && SESSION::idUserType() == ID_USER_TYPE_VENDOR */)
+            $typeUser = null;
+            try
+            {
+                [$idUser, $emailUser, $typeUser] = JWTController::decode();
+                $parametersIdAndEmail = [':idUser' => ['value' => $idUser], ':emailUser' => ['value' => $emailUser]] ;
+                $user = UserController::getOneByIdAndEmail($parametersIdAndEmail);
+                if($user)
+                {
+                    if(SessionController::getOneByIdUser([':idUser' => ['value' => $idUser] ]))
+                    {
+                        JWTController::saveJWTinSessionPHP($user, $typeUser);
+                        SessionController::resetById($idUser);
+                        return [$idUser, $emailUser, $typeUser];
+                    }
+                }
+            }
+            catch (ExpiredException $e)
+            {
+                if($cancelCatch)
+                {
+                    // echo 'Token has expired: ' . $e->getMessage();
+                    URL::redirectTo($path);
+                }
+            }
+            catch (Exception $e)
+            {
+                
+                if($cancelCatch)
+                {
+                    // echo 'Token has expired: ' . $e->getMessage();
+                    URL::redirectTo($path);
+                }
+            }
+            
+            if($cancelCatch)
+            {
+                URL::redirectTo($path);
+            }
+            // return [false, false, false];
+            return false;
+        }
+
+        public static function isNotLogged($path = 'home', $cancelCatch = true)
+        {
+            return !self::isLogged($path, $cancelCatch);
+        }
+
+        private static function isLoggedAndXTypeUser($path = 'home' , $cancelCatch = true , $typeUser = null)
+        {
+            [$idUser, $emailUser, $typeUser] = self::isLogged($path, $cancelCatch);
+
+            if($typeUser == 'admin')
             {
                 return true;
             }
-
-            URL::redirectTo($path);
-        }
-
-        public static function isAnActiveUser()
-        {
-            return true;
-            // return SESSION::stringParameter('user_state') == USER_STATE_ACTIVE;
-        }
+            if($cancelCatch)
+            {
+                URL::redirectTo($path);
+            }
+        }      
     }
 
 ?>

@@ -107,6 +107,18 @@
                 'title' => "Authorized Users Only",
             ],
             [
+                'path' => 'logout',
+                'router' => [
+                    'pointer' => 'NitsugaRouter::logout',
+                ],
+                'title' => "Bye Bye",
+                'guard' => [
+                    'pointer' => 'NitsugaGuard::isLogged',
+                    'params' => ['home']
+                    // 'params' => ['cupoftea']
+                ],
+            ],
+            [
                 'path' => 'auth/dashboard',
                 'router' => [
                     'pointer' => 'NitsugaRouter::authDashboard',

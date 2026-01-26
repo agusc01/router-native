@@ -8,7 +8,7 @@
     class SessionController extends BaseController
 	{
         // CREATE TABLE sessions (
-        //     idSession INT AUTO_INCREMENT PRIMARY KEY,
+        //     -- idSession INT AUTO_INCREMENT PRIMARY KEY,
         //     idUser INT NOT NULL,
         //     loginAtSession TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         //     lastMoveAtSession TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -41,6 +41,18 @@
                           WHERE idUser = :idUser && lastMoveAtSession < DATE_SUB('$currentDate', INTERVAL :time MINUTE);";
 
             return QueryController::parameters($query, $parameters, false);
+        }
+
+        public static function resetById($idUser)
+        {
+            SessionController::deleteOneByIdAtAfterXMinutes([':idUser' => ['value' => $idUser]]);
+            $currentSession = SessionController::getOneByIdUser([':idUser' => ['value' => $idUser]]);
+                    
+            if($currentSession)
+            {   
+                $currentSession->lastMoveAtSession = SessionController::date();
+                SessionController::updateOne($currentSession);
+            }
         }
 	}
 

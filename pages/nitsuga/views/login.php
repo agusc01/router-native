@@ -1,9 +1,17 @@
 <?php
 
-    include_once 'helpers/post.php';
-    include_once 'helpers/url.php';
-    include_once 'controllers/user-controller.php';
-    include_once 'controllers/session-controller.php';
+    require_once 'config/_index.php';
+    require_once 'helpers/post.php';
+    require_once 'helpers/url.php';
+    require_once 'controllers/user-controller.php';
+    require_once 'controllers/session-controller.php';
+
+    require_once 'helpers/session.php';
+    
+    require_once 'assets/jwt/_index.php';
+    use \Firebase\JWT\JWT;
+    use \Firebase\JWT\Key;
+    require_once 'guards/nitsuga-guard.php';
 
     if(POST::isPOST())
     {
@@ -22,34 +30,25 @@
                     ':emailUser' => [ 'value' => $inputs['email'] ],
                     ':passwordUser' => [ 'value' => $inputs['password'] ],
                 ]); 
-                // var_dump($user);
+                
                 if($user)
                 {
-                    $_SESSION['isAdmin'] = 'yes';
-                    $_SESSION['idUser'] = $user->idUser;
-                    $userSession = new SessionModel([
+                    JWTController::saveJWTinSessionPHP($user,'admin'); //TODO: typeUser in DB
+                    SessionController::createOne(new SessionModel([
                         'idUser' => $user->idUser,
                         'loginAtSession' => SessionController::date(),
                         'lastMoveAtSession' => SessionController::date(),
-                    ]);
-                    $session = SessionController::createOne($userSession);
+                    ]));
                     URL::redirectTo('auth/dashboard');
                 }
             }
         }
         
-        var_dump(POST::getErrorMessages());
+        // var_dump(POST::getErrorMessages());
     }
-    else
+    else if(NitsugaGuard::isAdmin('login', false))
     {
-        $idUser = SESSION::stringParameter('idUser');
-        if(SESSION::stringParameter('isAdmin') 
-            && UserController::getOneById($idUser)
-            && SessionController::getOneByIdUser([':idUser' => ['value' => $idUser]])
-        )
-        {
-            URL::redirectTo('auth/dashboard');
-        }
+        URL::redirectTo('auth/dashboard');
     }
 ?>
 <?php include_once 'pages/nitsuga/views/components/head.php'; ?>

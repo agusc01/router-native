@@ -4,7 +4,7 @@
     class SessionModel extends BaseModel 
     {
         public $attributes = [
-            'idSession' => 'int',
+            // 'idSession' => 'int',
             'idUser' => 'int',
             'loginAtSession' => 'timestamp',
             'lastMoveAtSession' => 'timestamp',

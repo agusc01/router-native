@@ -93,6 +93,11 @@
             self::includeFile('login.php');
         }
 
+        public static function logout()
+        {
+            self::includeFile('logout.php');
+        }
+
         public static function authDashboard()
         {
             self::includeFile('auth/dashboard.php');

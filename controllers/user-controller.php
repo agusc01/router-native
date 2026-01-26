@@ -28,6 +28,17 @@
                         ";
             return QueryController::parameters($query, $parameters, true);
         }
+
+        public static function getOneByIdAndEmail($parameters)
+        {
+            $query = "SELECT 
+                            u.*
+                            FROM users AS u
+                            WHERE u.idUser = :idUser
+                                AND u.emailUser = :emailUser
+                        ";
+            return QueryController::parameters($query, $parameters, true);
+        }
 	}
 
 ?>

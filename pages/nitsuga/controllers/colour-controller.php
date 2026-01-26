@@ -12,6 +12,18 @@
         //     ordenColour INT NOT NULL
         // );
 
+        // INSERT INTO colours (nameColour, hexaColour, ordenColour) VALUES 
+        // ('Red', '#FF0000', 1),
+        // ('Green', '#00FF00', 2),
+        // ('Blue', '#0000FF', 3),
+        // ('Yellow', '#FFFF00', 4),
+        // ('Cyan', '#00FFFF', 5),
+        // ('Magenta', '#FF00FF', 6),
+        // ('Orange', '#FFA500', 7),
+        // ('Purple', '#800080', 8),
+        // ('Brown', '#A52A2A', 9),
+        // ('Pink', '#FFC0CB', 10);
+
 		public static $model = 'Colour';
 		public static $table = 'colours';
 	}

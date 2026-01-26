@@ -9,6 +9,7 @@
         //   `idWebsite` int UNSIGNED NOT NULL,
         //   `urlWebsite` varchar(100) NOT NULL,
         //   `telephoneWebsite` varchar(100) NOT NULL,
+        //   `whatsAppWebsite` varchar(100) NOT NULL,
         //   `emailWebsite` varchar(100) NOT NULL,
         //   `nameWebsite` varchar(100) NOT NULL,
         //   `urlLogoWebsite` varchar(100) NOT NULL,
@@ -16,6 +17,8 @@
         //   `tokenMailWebsite` varchar(40) NOT NULL,
         //   `mailFromTokenWebsite` varchar(100) NOT NULL
         // );
+        // INSERT INTO `websites` (`idWebsite`, `urlWebsite`, `telephoneWebsite`, `whatsAppWebsite`, `emailWebsite`, `nameWebsite`, `urlLogoWebsite`, `urlFaviconWebsite`, `tokenMailWebsite`, `mailFromTokenWebsite`) 
+        // VALUES (1, 'fakesite.com', '911', '911', 'fake@mail.com', 'Fake site', 'fake.png', 'fake.png', 'hidden', 'fakemaik@mail.com');
 
 		public static $model = 'Website';
 		public static $table = 'websites';

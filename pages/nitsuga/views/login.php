@@ -34,7 +34,7 @@
                 if($user)
                 {
                     JWTController::saveJWTinSessionPHP($user,'admin'); //TODO: typeUser in DB
-                    SessionController::deleteOneById($idUser);
+                    SessionController::deleteOneById($user->idUser ?? -1);
                     SessionController::createOne(new SessionModel([
                         'idUser' => $user->idUser,
                         'loginAtSession' => SessionController::date(),

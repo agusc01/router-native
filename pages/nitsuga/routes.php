@@ -90,20 +90,20 @@
                     [
                         'path' => '',
                         'router' => function() { return Router::view(NITSUGA_ROOT, 'auth/dashboard'); },
-                        'title' => "Admins only",
+                        'title' => "Admins dashboard",
                     ],
                     [
                         'path' => 'dashboard',
                         'router' => function() { return Router::redirectTo('auth'); },
-                        'title' => "Admins only",
                     ],
                     [
                         'path' => 'info',
                         'router' => function() { return Router::view(NITSUGA_ROOT, 'auth/info'); },
-                        'title' => "Admins only",
+                        'title' => "Admins Info",
                     ]
                 ],
                 'guard' => function () { return NitsugaGuard::isAdmin('login'); },
+                'title' => "Admins only",
             ],              
             [
                 'path' => 'protected',

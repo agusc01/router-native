@@ -57,8 +57,11 @@
                         $routeFound = true;
 
                         if (isset($route['guard'])) { $route['guard'](); }
-                        $route['title'] = $childRoute['title']; // Doing this for 'includes/title.php'
+
+                        // Doing this for 'includes/title.php'
+                        $route['title'] = isset($childRoute['title']) ? $childRoute['title'] : $route['title']; 
                         require_once 'includes/title.php';
+                        
                         $childRoute['router']();
                         break 2; // Break out of both loops
                     }

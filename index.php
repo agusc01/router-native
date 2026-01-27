@@ -57,6 +57,7 @@
                         $routeFound = true;
 
                         if (isset($route['guard'])) { $route['guard'](); }
+                        $route['title'] = $childRoute['title']; // Doing this for 'includes/title.php'
                         require_once 'includes/title.php';
                         $childRoute['router']();
                         break 2; // Break out of both loops
@@ -72,7 +73,9 @@
             require_once 'includes/title.php';
             $route['router']();
         }
-    } else {
+    } 
+    else
+    {
         echo "404 - Domain not recognized";
     }
 

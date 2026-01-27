@@ -85,10 +85,20 @@
                 'guard' => function () { return NitsugaGuard::isLogged('index'); },
             ],
             [
-                'path' => 'auth/dashboard',
-                'router' => function() { return Router::view(NITSUGA_ROOT, 'auth/dashboard'); },
+                'path' => 'auth',
+                'children' => [
+                    [
+                        'path' => 'dashboard',
+                        'router' => function() { return Router::view(NITSUGA_ROOT, 'auth/dashboard'); },
+                        'title' => "Admins only",
+                    ],
+                    [
+                        'path' => 'info',
+                        'router' => function() { return Router::view(NITSUGA_ROOT, 'auth/info'); },
+                        'title' => "Admins only",
+                    ]
+                ],
                 'guard' => function () { return NitsugaGuard::isAdmin('login'); },
-                'title' => "Admins only",
             ],              
             [
                 'path' => 'protected',

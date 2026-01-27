@@ -119,6 +119,7 @@
             [
                 'path' => '**',
                 'router' => function() { return Router::view(NITSUGA_ROOT, '404'); },
+                // 'router' => function() { return Router::redirectTo('404'); },
                 'title' => 'Error: Page not found',
             ],
         ];

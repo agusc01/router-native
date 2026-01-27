@@ -23,15 +23,14 @@
         }
     }
 
-    // var_dump($currentPath);
-
     if (isset($routes[$host]))
     {
-        $domainRoutes = array_slice($routes[$host], 0, -1, true);
-        $domainErrorPage = end($routes[$host]);
+        $domainErrorPage = array_filter($routes[$host], function($route) { return $route['path'] === '**'; });
+        $domainErrorPage = !empty($domainErrorPage) ? array_values($domainErrorPage)[0] : null;
+
         $routeFound = false;
 
-        foreach ($domainRoutes as $route)
+        foreach ($routes[$host] as $route)
         {
             $path = MAIN_FOLDER . ($route['path'] === '' ? '' : '/') . $route['path'];
 
@@ -73,6 +72,11 @@
 
         if (!$routeFound)
         {
+            if(!$domainErrorPage) 
+            {
+                echo '404 - Page not found.,';
+                return;
+            }
             $route = $domainErrorPage; // Doing this for 'includes/title.php'
             require_once 'includes/title.php';
             $route['router']();

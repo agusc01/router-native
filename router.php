@@ -1,4 +1,5 @@
 <?php
+
     class Router
     {
         public static function view($prefix, $fileName)
@@ -13,6 +14,12 @@
             {
                 include_once "$prefix/404.php";
             }
+        }
+
+        public static function redirectTo($path)
+        {
+            header("Location: ".BASE_URL.$path); 
+            exit();
         }
     }
 ?>

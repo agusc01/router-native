@@ -3,7 +3,7 @@
     require_once 'database/database-adapter.php';
     require_once 'config/_index.php';
 
-    class BaseController
+    abstract class BaseController
     {
         public static $table;
         public static $model;

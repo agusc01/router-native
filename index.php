@@ -10,7 +10,6 @@
     require_once 'config/_index.php';
 
     $host = str_replace('www.', '', $_SERVER['HTTP_HOST']);
-
     $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     $currentPath = trim($requestUri, '/');
     $currentPath = str_replace('//','/', $currentPath);
@@ -22,13 +21,6 @@
             $currentPath = '/' . $currentPath;
         }
     }
-
-    // echo "<pre>";
-    // var_dump($currentPath);
-    // var_dump($host);
-    // var_dump($routes);
-    // var_dump($routes[$host]);
-    // echo "</pre>";
 
     if (isset($routes[$host]))
     {
@@ -44,33 +36,9 @@
             {
                 $routeFound = true;
 
-                if (isset($route['guard']))
-                {
-                    $guard = $route['guard'];
-
-                    if (isset($guard['params']))
-                    {
-                        require_once 'includes/title.php';
-                        call_user_func($guard['pointer'], ...($guard['params'] ?? []));
-                    }
-                    else
-                    {
-                        require_once 'includes/title.php';
-                        echo call_user_func($guard['pointer']);
-                    }
-                }
-
-                $router = $route['router'];
-                if (isset($router['params']))
-                {
-                    require_once 'includes/title.php';
-                    echo call_user_func($router['pointer'], ...($router['params'] ?? []));
-                }
-                else
-                {
-                    require_once 'includes/title.php';
-                    echo call_user_func($router['pointer']);
-                }
+                if (isset($route['guard'])) { handlerPointer($route['guard']); }
+                require_once 'includes/title.php';
+                handlerPointer($route['router']);
                                             
                 break;
             }
@@ -78,14 +46,23 @@
 
         if (!$routeFound)
         {
-            $router = $domainErrorPage['router'];
-
+            $route = $domainErrorPage; // Doing this for 'includes/title.php'
             require_once 'includes/title.php';
-            echo call_user_func($router['pointer']);
+            handlerPointer($route['router']);
         }
     }
     else
     {
         echo "404 - Domain not recognized";
+    }
+
+
+    function handlerPointer($handler)
+    {
+        if (isset($handler['params']))
+        {
+            return call_user_func($handler['pointer'], ...($handler['params'] ?? []));
+        }
+        return call_user_func($handler['pointer']);
     }
 ?>

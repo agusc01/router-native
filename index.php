@@ -4,7 +4,7 @@
     {
         session_start();
     }
-    require_once 'router/_index.php';
+    require_once 'router.php';
     require_once 'guards/_index.php';
     require_once 'routes/_index.php';
     require_once 'config/_index.php';
@@ -36,9 +36,9 @@
             {
                 $routeFound = true;
 
-                if (isset($route['guard'])) { handlerPointer($route['guard']); }
+                if (isset($route['guard'])) { $route['guard'](); }
                 require_once 'includes/title.php';
-                handlerPointer($route['router']);
+                $route['router']();
                                             
                 break;
             }
@@ -48,7 +48,7 @@
         {
             $route = $domainErrorPage; // Doing this for 'includes/title.php'
             require_once 'includes/title.php';
-            handlerPointer($route['router']);
+            $route['router']();
         }
     }
     else
@@ -56,13 +56,4 @@
         echo "404 - Domain not recognized";
     }
 
-
-    function handlerPointer($handler)
-    {
-        if (isset($handler['params']))
-        {
-            return call_user_func($handler['pointer'], ...($handler['params'] ?? []));
-        }
-        return call_user_func($handler['pointer']);
-    }
 ?>

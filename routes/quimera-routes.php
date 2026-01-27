@@ -1,35 +1,27 @@
 <?php
-    $routes['localhost2'] = 
+    define('QUIMERA_ROOT', 'pages/quimera/views');
+
+    $routes['localhost'] = 
         [
             [
                 'path' => '',
-                'router' => [
-                    'pointer' => 'QuimeraRouter::home',
-                ],
+                'router' => function () { return Router::view(QUIMERA_ROOT,'home');}
             ],
             [
                 'path' => 'index',
-                'router' => [
-                    'pointer' => 'QuimeraRouter::home',
-                ],
+                'router' => function () { return Router::view(QUIMERA_ROOT,'home');}
             ],
             [
                 'path' => 'home',
-                'router' => [
-                    'pointer' => 'QuimeraRouter::home',
-                ],
+                'router' => function () { return Router::view(QUIMERA_ROOT,'home');}
             ],
             [
                 'path' => 'cupoftea',
-                'router' => [
-                    'pointer' => 'QuimeraRouter::pageUnderMaintenance',
-                ],
+                'router' => function () { return Router::view(QUIMERA_ROOT,'page-under-maintenance');}
             ],
             [
                 'path' => '**',
-                'router' => [
-                    'pointer' => 'QuimeraRouter::pageNotFound',
-                ],
+                'router' => function () { return Router::view(QUIMERA_ROOT,'404');}
             ],
         ];
 ?>

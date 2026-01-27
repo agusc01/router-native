@@ -1,159 +1,109 @@
 <?php
-    $routes['localhost'] = 
+    define('NITSUGA_ROOT', 'pages/nitsuga/views');
+
+    $routes['localhost2'] = 
         [
             [
                 'path' => '',
-                'router' => [
-                    'pointer' => 'NitsugaRouter::home',
-                ],
+                'router' => function() { return Router::view(NITSUGA_ROOT, 'home'); },
                 'title' => 'Start',
             ],
             [
                 'path' => 'index',
-                'router' => [
-                    'pointer' => 'NitsugaRouter::home',
-                ],
+                'router' => function() { return Router::view(NITSUGA_ROOT, 'home'); },
                 'title' => 'Index',
             ],
             [
                 'path' => 'home',
-                'router' => [
-                    'pointer' => 'NitsugaRouter::home',
-                ],
+                'router' => function() { return Router::view(NITSUGA_ROOT, 'home'); },
                 'title' => 'Home',
             ],
             [
                 'path' => 'cupoftea',
-                'router' => [
-                    'pointer' => 'NitsugaRouter::pageUnderMaintenance',
-                ],
+                'router' => function() { return Router::view(NITSUGA_ROOT, 'page-under-maintenance'); },
                 'title' => 'Want a cup of tea, Mate ?',
             ],
             [
                 'path' => 'contact',
-                'router' => [
-                    'pointer' => 'NitsugaRouter::contact',
-                ],
+                'router' => function() { return Router::view(NITSUGA_ROOT, 'contact'); },
                 'title' => 'Contact',
             ],
             [
                 'path' => 'database',
-                'router' => [
-                    'pointer' => 'NitsugaRouter::database',
-                ],
+                'router' => function() { return Router::view(NITSUGA_ROOT, 'database'); },
                 'title' => 'Database Adapter',
             ],
             [
                 'path' => 'grettings',
-                'router' => [
-                    'pointer' => 'NitsugaRouter::grettings',
-                ],
+                'router' => function() { return Router::view(NITSUGA_ROOT, 'grettings'); },
                 'title' => 'Using GET',
             ],
             [
                 'path' => 'captcha',
-                'router' => [
-                    'pointer' => 'NitsugaRouter::captcha',
-                ],
+                'router' => function() { return Router::view(NITSUGA_ROOT, 'captcha'); },
                 'title' => 'Are you a robot ?',
             ],
             [
                 'path' => 'email',
-                'router' => [
-                    'pointer' => 'NitsugaRouter::email',
-                ],
+                'router' => function() { return Router::view(NITSUGA_ROOT, 'email'); },
                 'title' => 'SPAM',
             ],
             [
                 'path' => 'forms',
-                'router' => [
-                    'pointer' => 'NitsugaRouter::forms',
-                ],
+                'router' => function() { return Router::view(NITSUGA_ROOT, 'forms'); },
                 'title' => 'Validations',
             ],
             [
                 'path' => 'title',
-                'router' => [
-                    'pointer' => 'NitsugaRouter::title',
-                ],
+                'router' => function() { return Router::view(NITSUGA_ROOT, 'title'); },
                 'title' => 'Title from routes',
             ],
             [
                 'path' => 'file',
-                'router' => [
-                    'pointer' => 'NitsugaRouter::file',
-                ],
+                'router' => function() { return Router::view(NITSUGA_ROOT, 'file'); },
                 'title' => 'File things',
             ],      
             [
                 'path' => 'database-excel',
-                'router' => [
-                    'pointer' => 'NitsugaRouter::databaseExcel',
-                ],
+                'router' => function() { return Router::view(NITSUGA_ROOT, 'database-excel'); },
                 'title' => "Download Colour's Database",
             ],
             [
                 'path' => 'database-pdf',
-                'router' => [
-                    'pointer' => 'NitsugaRouter::databasePDF',
-                ],
+                'router' => function() { return Router::view(NITSUGA_ROOT, 'database-pdf'); },
                 'title' => "Download Colour's Database",
             ],    
             [
                 'path' => 'login',
-                'router' => [
-                    'pointer' => 'NitsugaRouter::login',
-                ],
+                'router' => function() { return Router::view(NITSUGA_ROOT, 'login'); },
                 'title' => "Authorized Users Only",
             ],
             [
                 'path' => 'logout',
-                'router' => [
-                    'pointer' => 'NitsugaRouter::logout',
-                ],
+                'router' => function() { return Router::view(NITSUGA_ROOT, 'logout'); },
                 'title' => "Bye Bye",
-                'guard' => [
-                    'pointer' => 'NitsugaGuard::isLogged',
-                    'params' => ['home']
-                    // 'params' => ['cupoftea']
-                ],
+                'guard' => function () { return NitsugaGuard::isLogged('home'); },
             ],
             [
                 'path' => 'auth/dashboard',
-                'router' => [
-                    'pointer' => 'NitsugaRouter::authDashboard',
-                ],
-                'guard' => [
-                    'pointer' => 'NitsugaGuard::isAdmin',
-                    'params' => ['login']
-                    // 'params' => ['cupoftea']
-                ],
+                'router' => function() { return Router::view(NITSUGA_ROOT, 'auth/dashboard'); },
+                'guard' => function () { return NitsugaGuard::isAdmin('login'); },
                 'title' => "Admins only",
             ],              
             [
                 'path' => 'protected',
-                'router' => [
-                    'pointer' => 'NitsugaRouter::protected',
-                ],
-                'guard' => [
-                    'pointer' => 'NitsugaGuard::isCustomer',
-                    'params' => ['404']
-                    // 'params' => ['cupoftea']
-                ],
+                'router' => function() { return Router::view(NITSUGA_ROOT, 'protected'); },
+                'guard' => function () { return NitsugaGuard::isCustomer('404'); },
                 'title' => 'This URL is protected',
             ],
             [
                 'path' => '404',
-                'router' => [
-                    'pointer' => 'NitsugaRouter::pageNotFound',
-                ],
+                'router' => function() { return Router::view(NITSUGA_ROOT, '404'); },
                 'title' => 'Not Found Mate !',
             ],
             [
                 'path' => '**',
-                'router' => [
-                    'pointer' => 'NitsugaRouter::pageNotFound',
-                ],
+                'router' => function() { return Router::view(NITSUGA_ROOT, '404'); },
                 'title' => 'Error: Page not found',
             ],
         ];

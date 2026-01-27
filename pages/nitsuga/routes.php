@@ -1,21 +1,21 @@
 <?php
     define('NITSUGA_ROOT', 'pages/nitsuga/views');
 
-    $routes['localhost2'] = 
+    $routes['localhost'] = 
         [
             [
                 'path' => '',
-                'router' => function() { return Router::view(NITSUGA_ROOT, 'home'); },
+                'router' => function() { return Router::view(NITSUGA_ROOT, 'index'); },
                 'title' => 'Start',
             ],
             [
                 'path' => 'index',
-                'router' => function() { return Router::view(NITSUGA_ROOT, 'home'); },
+                'router' => function() { return Router::view(NITSUGA_ROOT, 'index'); },
                 'title' => 'Index',
             ],
             [
                 'path' => 'home',
-                'router' => function() { return Router::view(NITSUGA_ROOT, 'home'); },
+                'router' => function() { return Router::view(NITSUGA_ROOT, 'index'); },
                 'title' => 'Home',
             ],
             [
@@ -82,7 +82,7 @@
                 'path' => 'logout',
                 'router' => function() { return Router::view(NITSUGA_ROOT, 'logout'); },
                 'title' => "Bye Bye",
-                'guard' => function () { return NitsugaGuard::isLogged('home'); },
+                'guard' => function () { return NitsugaGuard::isLogged('index'); },
             ],
             [
                 'path' => 'auth/dashboard',

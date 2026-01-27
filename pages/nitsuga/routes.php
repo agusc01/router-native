@@ -88,7 +88,7 @@
                 'path' => 'auth',
                 'children' => [
                     [
-                        'path' => 'dashboard',
+                        'path' => '',
                         'router' => function() { return Router::view(NITSUGA_ROOT, 'auth/dashboard'); },
                         'title' => "Admins only",
                     ],

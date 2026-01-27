@@ -23,6 +23,8 @@
         }
     }
 
+    // var_dump($currentPath);
+
     if (isset($routes[$host]))
     {
         $domainRoutes = array_slice($routes[$host], 0, -1, true);
@@ -33,7 +35,7 @@
         {
             $path = MAIN_FOLDER . ($route['path'] === '' ? '' : '/') . $route['path'];
 
-            if ($path === $currentPath)
+            if ($path === $currentPath && !isset($route['children']))
             {
                 $routeFound = true;
 
@@ -47,7 +49,8 @@
             {
                 foreach ($route['children'] as $childRoute)
                 {
-                    $childPath = MAIN_FOLDER . ($route['path'] === '' ? '' : '/') . $route['path'] . ($childRoute['path'][0] === '/' ? '' : '/') . $childRoute['path'];
+
+                    $childPath = $path . ($childRoute['path'] === '' ? '':  '/' . $childRoute['path']);
 
                     if ($childPath === $currentPath)
                     {
@@ -58,6 +61,7 @@
                         $childRoute['router']();
                         break 2; // Break out of both loops
                     }
+
                 }
             }
         }

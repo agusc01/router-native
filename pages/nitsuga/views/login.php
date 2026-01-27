@@ -11,7 +11,7 @@
     require_once 'assets/jwt/_index.php';
     use \Firebase\JWT\JWT;
     use \Firebase\JWT\Key;
-    require_once 'guards/nitsuga-guard.php';
+    require_once 'pages/nitsuga/guards.php';
 
     if(POST::isPOST())
     {

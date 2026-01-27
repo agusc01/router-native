@@ -7,7 +7,7 @@
 
     require_once 'router.php';
     require_once 'routes.php';
-    require_once 'guards/_index.php';
+    require_once 'guards.php';
     require_once 'config/_index.php';
 
     $host = str_replace('www.', '', $_SERVER['HTTP_HOST']);

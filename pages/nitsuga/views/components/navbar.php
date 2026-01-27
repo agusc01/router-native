@@ -1,5 +1,5 @@
 <?php require_once 'config/_index.php'; ?>
-<?php require_once 'guards/nitsuga-guard.php'; ?>
+<?php require_once 'pages/nitsuga/guards.php'; ?>
 <ul>
     <li><a href="/<?= MAIN_FOLDER ?>/home">Home</a></li>
     <li>Generate <a href="/<?= MAIN_FOLDER ?>/captcha">captcha</a></li>

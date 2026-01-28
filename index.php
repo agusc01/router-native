@@ -25,35 +25,26 @@
 
     if (isset($routes[$host]))
     {
-        $routeErrorPage = array_filter($routes[$host], function($route) { return $route['path'] === '**'; });
-        $routeErrorPage = !empty($routeErrorPage) ? array_values($routeErrorPage)[0] : null;
+        $routeErrorPage = Router::catchRouteByPath($routes[$host], '**');
 
         $routeFound = false;
 
         foreach ($routes[$host] as $route)
         {
-            $path = MAIN_FOLDER . ($route['path'] === '' ? '' : '/') . $route['path'];
+            $path = Router::concatPath(MAIN_FOLDER, $route['path'] ?? '');
 
             if ($path === $currentPath && !isset($route['children']))
             {
                 $routeFound = true;
-
-                if (isset($route['guard'])) { $route['guard'](); }
-                require_once 'includes/title.php';
-                $route['router']();
-                break;
+                return Router::render($route);
             }
 
             if (isset($route['children']))
             {
                 foreach ($route['children'] as $childrenRoute)
                 {
-
-                    $childrenPath = $path . ($childrenRoute['path'] === '' ? '':  '/' . $childrenRoute['path']);
-                    $childrenRouteErrorPage = array_filter($route['children'], function($childrenRoute) { 
-                        return $childrenRoute['path'] === '**'; 
-                    });
-                    $childrenRouteErrorPage = !empty($childrenRouteErrorPage) ? array_values($childrenRouteErrorPage)[0] : null;
+                    $childrenPath = Router::concatPath($path, $childrenRoute['path'] ?? '');
+                    $childrenRouteErrorPage = Router::catchRouteByPath($route['children'], '**');
 
                     if ($childrenPath === $currentPath)
                     {
@@ -61,23 +52,18 @@
 
                         if (isset($route['guard'])) { $route['guard'](); }
                         if (isset($childrenRoute['guard'])) { $childrenRoute['guard'](); } // TODO: test
+                        $childrenRoute['title'] = isset($childrenRoute['title']) ? $childrenRoute['title'] : ($route['title'] ?? ''); 
 
-                        // Doing this for 'includes/title.php'
-                        $route['title'] = isset($childrenRoute['title']) ? $childrenRoute['title'] : $route['title']; 
-                        require_once 'includes/title.php';
-
-                        $childrenRoute['router']();
-                        break 2; // Break out of both loops
+                        return Router::render($childrenRoute);
                     }
-
                 }
 
-                if(!$routeFound && $childrenRouteErrorPage)
-                {
-                    $route = $childrenRouteErrorPage; // Doing this for 'includes/title.php'
-                    require_once 'includes/title.php';
-                    $route['router']();
-                }
+                // TODO: It's not working as it have it
+                // It must show ChildrenRouterErrorPage when you are inside 'root (route) path'
+                // if(!$routeFound && $childrenRouteErrorPage)
+                // {
+                //     Router::render($childrenRouteErrorPage);
+                // }
             }
         }
 
@@ -88,9 +74,7 @@
                 echo '404 - Page not found.,';
                 return;
             }
-            $route = $routeErrorPage; // Doing this for 'includes/title.php'
-            require_once 'includes/title.php';
-            $route['router']();
+            Router::render($routeErrorPage);
         }
     } 
     else

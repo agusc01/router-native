@@ -25,8 +25,8 @@
 
     if (isset($routes[$host]))
     {
-        $domainErrorPage = array_filter($routes[$host], function($route) { return $route['path'] === '**'; });
-        $domainErrorPage = !empty($domainErrorPage) ? array_values($domainErrorPage)[0] : null;
+        $routeErrorPage = array_filter($routes[$host], function($route) { return $route['path'] === '**'; });
+        $routeErrorPage = !empty($routeErrorPage) ? array_values($routeErrorPage)[0] : null;
 
         $routeFound = false;
 
@@ -46,38 +46,49 @@
 
             if (isset($route['children']))
             {
-                foreach ($route['children'] as $childRoute)
+                foreach ($route['children'] as $childrenRoute)
                 {
 
-                    $childPath = $path . ($childRoute['path'] === '' ? '':  '/' . $childRoute['path']);
+                    $childrenPath = $path . ($childrenRoute['path'] === '' ? '':  '/' . $childrenRoute['path']);
+                    $childrenRouteErrorPage = array_filter($route['children'], function($childrenRoute) { 
+                        return $childrenRoute['path'] === '**'; 
+                    });
+                    $childrenRouteErrorPage = !empty($childrenRouteErrorPage) ? array_values($childrenRouteErrorPage)[0] : null;
 
-                    if ($childPath === $currentPath)
+                    if ($childrenPath === $currentPath)
                     {
                         $routeFound = true;
 
                         if (isset($route['guard'])) { $route['guard'](); }
-                        if (isset($childRoute['guard'])) { $childRoute['guard'](); } // TODO: test
+                        if (isset($childrenRoute['guard'])) { $childrenRoute['guard'](); } // TODO: test
 
                         // Doing this for 'includes/title.php'
-                        $route['title'] = isset($childRoute['title']) ? $childRoute['title'] : $route['title']; 
+                        $route['title'] = isset($childrenRoute['title']) ? $childrenRoute['title'] : $route['title']; 
                         require_once 'includes/title.php';
 
-                        $childRoute['router']();
+                        $childrenRoute['router']();
                         break 2; // Break out of both loops
                     }
 
+                }
+
+                if(!$routeFound && $childrenRouteErrorPage)
+                {
+                    $route = $childrenRouteErrorPage; // Doing this for 'includes/title.php'
+                    require_once 'includes/title.php';
+                    $route['router']();
                 }
             }
         }
 
         if (!$routeFound)
         {
-            if(!$domainErrorPage) 
+            if(!$routeErrorPage) 
             {
                 echo '404 - Page not found.,';
                 return;
             }
-            $route = $domainErrorPage; // Doing this for 'includes/title.php'
+            $route = $routeErrorPage; // Doing this for 'includes/title.php'
             require_once 'includes/title.php';
             $route['router']();
         }

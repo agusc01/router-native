@@ -88,6 +88,11 @@
                 'path' => 'auth',
                 'children' => [
                     [
+                        'path' => '**',
+                        'router' => function() { return Router::redirectTo('auth/404'); },
+                        'title' => "Admin Error",
+                    ],
+                    [
                         'path' => '',
                         'router' => function() { return Router::view(NITSUGA_ROOT, 'auth/dashboard'); },
                         'title' => "Admins dashboard",
@@ -97,10 +102,15 @@
                         'router' => function() { return Router::redirectTo('auth'); },
                     ],
                     [
+                        'path' => '404',
+                        'router' => function() { return Router::view(NITSUGA_ROOT, 'auth/404'); },
+                        'title' => "Admin Error (404)",
+                    ],
+                    [
                         'path' => 'info',
                         'router' => function() { return Router::view(NITSUGA_ROOT, 'auth/info'); },
                         'title' => "Admins Info",
-                    ]
+                    ],                   
                 ],
                 'guard' => function () { return NitsugaGuard::isAdmin('login'); },
                 'title' => "Admins only",

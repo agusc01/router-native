@@ -3,8 +3,8 @@
     if($_SERVER['HTTP_HOST'] != 'localhost')
     {
         define('MAIN_FOLDER', '');
-        error_reporting(E_ALL);
-        ini_set('display_errors', 1);
+        error_reporting(0);
+        ini_set('display_errors', 0);
 
         define('SERVER_HTTP_HOST', str_replace('www.', '', $_SERVER['HTTP_HOST']));
         define('BASE_URL', 'https://'.SERVER_HTTP_HOST.'/');
